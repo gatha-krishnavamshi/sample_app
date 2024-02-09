@@ -72,6 +72,11 @@ Based on your history file, here are the installation commands and steps you fol
     export PATH=~/.npm-global/bin:$PATH
     ```
 
+14. web packager install :
+    '''bash
+    rails webpacker:install
+    '''
+
 Now, you can proceed with running the Rails server:
 ```bash
 rails server -b 0.0.0.0 -p 3000
