@@ -73,9 +73,9 @@ Based on your history file, here are the installation commands and steps you fol
     ```
 
 14. web packager install :
-    '''bash
+    ```bash
     rails webpacker:install
-    '''
+    ```
 
 Now, you can proceed with running the Rails server:
 ```bash
