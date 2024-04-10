@@ -1,0 +1,30 @@
+---
+- name: Deploy Ruby on Rails application
+  hosts: your_server
+  vars:
+    deploy_dir: "/path/to/deployment/directory"
+    git_repo: "git@github.com:user/repo.git"
+    git_branch: "master"
+    private_key: "/path/to/your/private/key"
+  tasks:
+    - name: Backup previous code
+      command: "cp -r {{ deploy_dir }}/* {{ deploy_dir }}/backup_{{ ansible_date_time.date }}_{{ ansible_date_time.time }}"
+      ignore_errors: yes
+
+    - name: Clone Git repository
+      git:
+        repo: "{{ git_repo }}"
+        dest: "{{ deploy_dir }}"
+        version: "{{ git_branch }}"
+        accept_hostkey: yes
+        key_file: "{{ private_key }}"
+
+    - name: Install Ruby dependencies
+      command: "bundle install --without development test"
+      args:
+        chdir: "{{ deploy_dir }}"
+
+    - name: Install Node.js dependencies
+      command: "npm install"
+      args:
+        chdir: "{{ deploy_dir }}"
